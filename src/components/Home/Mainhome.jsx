@@ -7,6 +7,8 @@ import { writeContract, readContract } from "@wagmi/core";
 import { useConfig } from 'wagmi';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
 
 // Styled components
 const StyledTextField = styled(TextField)({
@@ -65,6 +67,9 @@ const CoinForm = ({ onClose }) => {
   const coinImageRef = useRef(null);
   const config = useConfig();
   const [contractFee, setContractFee] = useState(0);
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+
 
   const contractAddress = '0x24e807eefA6cEb94F2d1d78a80705d3199BFf6F7';
   const abi = [
@@ -205,13 +210,29 @@ const CoinForm = ({ onClose }) => {
     }
   }
 
-  // File handling
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    setFormData(prev => ({ ...prev, file }));
-    setValue('file', file);
-  };
 
+  const handleFileSelect = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Create form data to send the file to the backend
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("email", user?.email);
+
+      // Send the file to the backend to upload to IPFS and save the address
+      try {
+        const response = await axios.post("/api/upload-to-pinta", formData);
+        if (response?.data?.success) {
+          setFormData(response?.data?.file); // Update profile photo
+
+          dispatch(addUser(response?.data?.file));
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      }
+    }
+  };
+  
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: '#1a1a2a', padding: '40px', color: 'white' }}>
       <Button onClick={onClose} sx={{ /* styles remain the same */ }}>
@@ -231,19 +252,19 @@ const CoinForm = ({ onClose }) => {
 
           {/* File Upload */}
           <Typography variant='h5' sx={{ color: '#60A5FA', marginBottom: '8px', fontSize: '14px' }}>Image or video</Typography>
-          <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileSelect} accept="image/*,video/*" ref={coinImageRef} />
-          <label htmlFor="file-upload">
-            <FileUploadBox>
-              <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-              </Box>
-              <Typography variant='h5' sx={{ color: 'white' }}>Drag and drop an image or video</Typography>
-            </FileUploadBox>
-          </label>
+            <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileSelect} accept="image/*,video/*" ref={coinImageRef} />
+            <label htmlFor="file-upload">
+              <FileUploadBox>
+                <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                </Box>
+                <Typography variant='h5' sx={{ color: 'white' }}>Drag and drop an image or video</Typography>
+              </FileUploadBox>
+            </label>
 
           {/* More Options */}
           <Button onClick={() => setShowMoreOptions(!showMoreOptions)} sx={{ color: '#60A5FA', textTransform: 'none', fontSize: '14px', marginTop: '20px', marginBottom: '20px', padding: 0 }}>
@@ -278,8 +299,6 @@ const MainHome = () => {
 
   const user = useSelector((state) => state.user.user);
 
-
-  // const handleStartCoin = () => setShowForm(true);
   const handleStartCoin = () => {
     if (!user?.walletAddress) {
       toast.error("Please connect your wallet first");
@@ -290,15 +309,69 @@ const MainHome = () => {
   const handleGoBack = () => setShowForm(false);
 
   return (
-    <Box sx={{ textAlign: 'center' }}>
-      {showForm ? <CoinForm onClose={handleGoBack} /> : (
-        <Box sx={{ textAlign: 'center', cursor: 'pointer', width: { lg: "22%" }, mx: "auto", mt: '20px' }}>
-          <Typography variant="h2" onClick={handleStartCoin} sx={{ textTransform: 'none', fontSize: '16px', fontWeight: '300', color: '#60A5FA', borderBottom: '1px solid #60A5FA', paddingBottom: '6px' }}>
-            Start your own coin
-          </Typography>
+    <>
+      <Box sx={{ textAlign: 'center', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100%', mt: '20px' }}>
+        {showForm ? <CoinForm onClose={handleGoBack} /> : (
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', cursor: 'pointer', maxWidth: { lg: '400px' }, mt: '20px' }}>
+            <Typography variant="h2" onClick={handleStartCoin} sx={{ color: 'white' }}>
+              [Start your own coin]
+            </Typography>
+          </Box>
+        )}
+        <img s src="/king-of-the-hill.webp" alt="" />
+      </Box>
+      <Link href="/Coinsdata" style={{ textDecoration: "none",  }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center', mt: '10px', p: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
+          <Box>
+            <img src='/loin.png' alt="" style={{ maxWidth: '100%', height: 'auto' }} />
+          </Box>
+          <Box>
+            <Typography variant="body1">
+              Created by test1  <span style={{ color: '#1AB75E' }}>5min</span> ago
+            </Typography>
+            <Typography variant="body1" color='#1AB75E'>
+              Marketcap:
+            </Typography>
+            <Typography variant="body1">
+              replies
+            </Typography>
+            <Typography variant="body1">
+              working for #Bitcoin [ticker:Bitcoin]
+            </Typography>
+          </Box>
         </Box>
-      )}
-    </Box>
+      </Link>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, mt: 2, p: 1 }}>
+        <TextField
+          placeholder="search for token"
+          sx={{
+            backgroundColor: '#222222', // Set your desired background color
+            borderRadius: '10px', // Set border radius to 20px
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                border: 'none', // Remove the outer border
+              },
+            },
+            input: {
+              color: '#fff',
+              border: '1px solid #ffff',
+              borderRadius: '10px',
+
+            },
+            width: { xs: '100%', sm: '450px' } // Full width on small screens
+          }}
+        />
+
+        <Button sx={{ backgroundColor: '#2563EB', color: 'white', '&:hover': { backgroundColor: '#1D4ED8' }, padding: "10px 40px" }}>
+          <Typography variant="subtitle1">
+            search
+          </Typography>
+        </Button>
+      </Box>
+
+    </>
+
   );
 };
 

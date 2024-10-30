@@ -32,7 +32,7 @@ export async function POST(req) {
         );
       }
 
-      const dataToSave = { email , otp , name: "pump", image: "", bio: "i loved pupm" , walletAddress: "" };
+      const dataToSave = { email , otp , name: "pump", image: "", bio: "i loved pupm" , walletAddress: ""  , file:null};
 
       const user = await User.create(dataToSave);
       await sendOtpEmail(email, otp);

@@ -1,3 +1,4 @@
+const { ArrowBackIosNew } = require("@mui/icons-material");
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
@@ -30,6 +31,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    file: {
+       type: Array,
+        default: [] 
+      },
   },
   {
     timestamps: true,

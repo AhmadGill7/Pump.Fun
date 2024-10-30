@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -57,40 +57,41 @@ const ShowNavbar = () => {
   const { address } = useAccount();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
+  console.log(user);
+
   const shouldShowProfile = Boolean(user?.walletAddress || user?.email && user?.otp === null)
-  let [randomNum,setrandomNum] = useState('3.244')
-  let [randomNum2,setrandomNum2] = useState('7.244')
+  let [randomNum, setrandomNum] = useState('3.244')
+  let [randomNum2, setrandomNum2] = useState('7.244')
 
   let changingNav = useRef()
   let changingNav2 = useRef()
 
 
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setInterval(() => {
-      let newNum =  Math.round(Math.random() * 1000) / 1000
-       setrandomNum(newNum)
-   
-       changingNav.current.classList.add('animationDiv') 
-       setTimeout(() => {
-       changingNav.current.classList.remove('animationDiv') 
-       }, 1000);
-     }, 5000);
- 
-     setInterval(() => {
-       let snewNum =  Math.round(Math.random() * 1000) / 1000
-       setrandomNum2(snewNum)
-    
-        changingNav2.current.classList.add('animationDiv') 
-        setTimeout(() => {
-        changingNav2.current.classList.remove('animationDiv') 
-        }, 1000);
-      }, 3000);
-  },[])
+      let newNum = Math.round(Math.random() * 1000) / 1000
+      setrandomNum(newNum)
+      changingNav?.current?.classList.add('animationDiv')
+      setTimeout(() => {
+        changingNav?.current?.classList.remove('animationDiv')
+      }, 1000);
+    }, 5000);
+
+    setInterval(() => {
+      let snewNum = Math.round(Math.random() * 1000) / 1000
+      setrandomNum2(snewNum)
+
+      changingNav2?.current?.classList.add('animationDiv')
+      setTimeout(() => {
+        changingNav2?.current?.classList.remove('animationDiv')
+      }, 1000);
+    }, 3000);
+  }, [])
 
   useEffect(() => {
 
-    if (!address && user?.email ) return
+    if (!address && user?.email) return
 
     // if (user?.walletAddress || user?.email && user?.otp === null) {
     //   setShouldShowProfile(true);
@@ -149,7 +150,8 @@ const ShowNavbar = () => {
               width: "100%",
             }}
           >
-            <img src="/logo.png" alt="" width={50} height={50} />
+            <Image src="/logo.png" alt="" width={50} height={50} />
+
             <Button
               sx={{
                 color: "#9cd",
@@ -187,13 +189,13 @@ const ShowNavbar = () => {
 
           {/* Middle Section - Transaction Info */}
           <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, width: '100%', marginTop: { xs: '10px', sm: '0' } }}>
-            <CustomButton  ref={changingNav} sx={{ width: '100%',minHeight:'50px', marginBottom: { xs: '5px', sm: '0' } }}>
+            <CustomButton ref={changingNav} sx={{ width: '100%', minHeight: '50px', marginBottom: { xs: '5px', sm: '0' } }}>
               <Typography variant='h6' align="center">
                 FzkHzE bought {randomNum} SOL of Troilans
               </Typography>
             </CustomButton>
 
-            <CustomBlueButton sx={{ width: '100%',minHeight:'50px' }} ref={changingNav2}>
+            <CustomBlueButton sx={{ width: '100%', minHeight: '50px' }} ref={changingNav2}>
               <Typography variant='h6' align="center">
                 {randomNum2}created BOT on 10/23/24
 

@@ -36,6 +36,7 @@ export async function POST(req) {
         bio: null,
         otp: null,
         image: null,
+        file: null,
       });
 
       return new Response(

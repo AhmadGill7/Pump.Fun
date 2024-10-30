@@ -4,7 +4,7 @@ import BgStar from "@/components/startbg/BgStar";
 import Navbar from "@/components/Navbar/Navbar";
 import MainHome from "@/components/Home/Mainhome";
 import { theme } from "@/theme";
-import { ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider } from "@mui/material";
 import Footer from "@/components/Footer/Footer";
 import ProfilePopup from "@/components/aditprofle/ProfilePopup";
 import { Button } from "@mui/material";
@@ -30,7 +30,7 @@ const ShowHome = () => {
   // const user = useSelector((state) => state.user.user);
 
   return (
-    <>
+    <Box data-rh="true">
       <ThemeProvider theme={theme}>
         <ToastContainer
           position='top-center'
@@ -47,11 +47,10 @@ const ShowHome = () => {
         <BgStar>
           <Navbar />
           <MainHome />
-
           <Footer />
         </BgStar>
       </ThemeProvider>
-    </>
+    </Box>
   );
 };
 

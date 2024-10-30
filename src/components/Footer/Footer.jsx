@@ -11,9 +11,19 @@ import Image from 'next/image';
 
 
 const AdsBoxes = ({ name, maketcap, desc, img, index }) => {
-    return <Box className={index === 0 ? "animationDiv" : ""} sx={{ width: '400px', minHeight: '180px', display: 'flex', marginTop: '40px', '&:hover': { outline: '2px solid white' } }} >
-        <img src={img} alt='Ad Image' width={160} />
-        <Box >
+    return <Box className={index === 0 ? "animationDiv" : ""} sx={{ width: '400px', minHeight: '180px', display: 'flex', marginTop: '40px', '&:hover': { outline: '2px solid white', cursor: 'pointer', borderRadius: '8px'  } }} >
+        <Box style={{ width: '180px', height: 'auto', overflow: 'hidden', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <img
+                src={img}
+                alt="Ad Image"
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '8px', // optional, for rounded corners
+                }}
+            />
+        </Box>        <Box >
             <Typography sx={{ margin: '20px 0 0 20px', fontSize: '.8em' }}>
                 Created By : {name}
             </Typography>
