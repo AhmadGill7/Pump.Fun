@@ -210,7 +210,7 @@ const Trades = () => {
                             >
                                 <TableCell>
                                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Image alt={row?.account} src='https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1?img-width=16&img-dpr=2&img-onerror=redirect' width={20} height={20} />
+                                        <img alt={row?.account} src='https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1?img-width=16&img-dpr=2&img-onerror=redirect' width={20} height={20} />
                                         <Chip
                                             label={row?.account}
                                             sx={{

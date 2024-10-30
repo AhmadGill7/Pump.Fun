@@ -382,7 +382,7 @@ const ShowAdvanced = () => {
                   readOnly: true,
                   startAdornment: (
                     <InputAdornment position='start'>
-                      <Image
+                      <img
                         alt='solana logo'
                         src='https://pump.fun/_next/image?url=%2Ficons%2Fsol_logo.png&w=16&q=75'
                         width={25}

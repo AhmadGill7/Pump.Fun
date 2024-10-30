@@ -149,7 +149,7 @@ const ShowNavbar = () => {
               width: "100%",
             }}
           >
-            <Image src="/logo.png" alt="" width="50px" height="50px" />
+            <img src="/logo.png" alt="" width={50} height={50} />
             <Button
               sx={{
                 color: "#9cd",

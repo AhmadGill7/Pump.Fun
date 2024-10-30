@@ -211,7 +211,7 @@ const Coindata = () => {
                                     <input type='number' style={{ width: '100%', border: '1px solid white', padding: '5px 10px', height: '50px', color: 'white', background: '#2E303A', margin: '20px 0', borderRadius: '10px', fontSize: '1.2em' }} placeholder='0.0' />
                                     <Box sx={{ position: 'absolute', display: 'flex', alignItems: 'center', right: '25px', top: '25px' }}>
                                         <Typography variant='body1' sx={{ color: 'white', marginRight: '10px' }}>Sigma</Typography>
-                                        <Image alt='solana' src='https://pump.mypinata.cloud/ipfs/QmcrsXmWizh1y1p5UPEtJ84UHQzkN6HcQhhrAdq1no1ChD?img-width=256&img-dpr=2&img-onerror=redirect' width={35} height={35} style={{ borderRadius: '50%' }} />
+                                        <img alt='solana' src='https://pump.mypinata.cloud/ipfs/QmcrsXmWizh1y1p5UPEtJ84UHQzkN6HcQhhrAdq1no1ChD?img-width=256&img-dpr=2&img-onerror=redirect' width={35} height={35} style={{ borderRadius: '50%' }} />
                                     </Box>
                                 </Box>
 

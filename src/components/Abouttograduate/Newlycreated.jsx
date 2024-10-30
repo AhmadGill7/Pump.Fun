@@ -70,7 +70,7 @@ const Newlycreated = () => {
                         <TableRow key={token?.name} sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.03)' } }}>
                             <TableCell sx={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
                                 <Box sx={{ display: 'flex', gap: 2 }}>
-                                    <Image src={token?.image} alt={token?.name} style={{ width: 48, height: 48, borderRadius: 8 }} />
+                                    <img src={token?.image} alt={token?.name} style={{ width: 48, height: 48, borderRadius: 8 }} />
                                     <Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                                             <Typography sx={{ color: '#E2E8F0', fontWeight: 500 }}>{token?.name}</Typography>
@@ -190,7 +190,7 @@ const Newlycreated = () => {
 
                                 <Box sx={{ display: { xs: 'block', lg: 'flex' }, mt: '5px' }}>
                                     <Box sx={{ display: 'flex' }}>
-                                        <Image alt='img' src='https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1?img-width=16&img-dpr=2&img-onerror=redirect' width={15} height={15} />
+                                        <img alt='img' src='https://pump.mypinata.cloud/ipfs/QmeSzchzEPqCU1jwTnsipwcBAeH7S4bmVvFGfF65iA1BY1?img-width=16&img-dpr=2&img-onerror=redirect' width={15} height={15} />
                                         <Box sx={{ background: 'blue', color: 'white', height: '15px', p: '2px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>8ttvrx</Box>
                                     </Box>
                                     <Typography sx={{ color: 'white', fontSize: '.7em', ml: '5px', textAlign: 'left', mt: '3px' }}>Saome sdj akma siisd e  cjdd a  ciasd asdjkm</Typography>

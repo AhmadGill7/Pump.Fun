@@ -105,7 +105,7 @@ const Abouttograduate = () => {
         <Box sx={{ overflowX: 'auto', display: 'flex', gap: 2, padding: 2, }} className='newScroll'>
             {scrollerKaData.map((data) => {
                 return <Box key={data?.time} sx={{ minWidth: '180px', minHeight: "80px", display: 'flex', background: '#1F2937', alignItems: 'center', px: '.5rem', borderRadius: '10px' }}>
-                    <Image alt='img' src={data?.img} sx={{ borderRadius: '10px' }} width={70} height={70} />
+                    <img alt='img' src={data?.img} sx={{ borderRadius: '10px' }} width={70} height={70} />
                     <Box sx={{ pl: '.5rem', fontSize: '.9em' }}>
                         <Typography sx={{ fontSize: '.9em', color: 'white' }}><span style={{ color: 'blue' }}>MC</span> {data?.MC}</Typography>
                         <Typography sx={{ fontSize: '.9em', color: 'white' }}><span style={{ color: 'blue' }}>V</span> {data?.V}</Typography>
