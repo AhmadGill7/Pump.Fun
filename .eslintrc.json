@@ -1,0 +1,11 @@
+{
+  "extends": "next",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+   "react/no-unescaped-entities": "off",
+    "*": "off" // disables all other rules if required
+  }
+}
