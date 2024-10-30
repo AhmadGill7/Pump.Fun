@@ -1,12 +1,18 @@
-// /src/app/api/update-profile/route.js
-
+// /src/app/api/save-name-bio/route.js
 import dbConnect from "@/dbConnect";
 import User from "@/Model/Users";
 
 export async function POST(req) {
   try {
     const { email, name, bio } = await req.json();
+    if(email || name || bio){
+      return new Response(
+        JSON.stringify({ success: false, error: "Invalid request" }),
+        { status: 400, headers: { "Content-Type": "application/json" } }
+      );
+    }
     await dbConnect();
+
 
     // Find user by email and update
     const user = await User.findOneAndUpdate(
@@ -27,7 +33,7 @@ export async function POST(req) {
       );
     }
   } catch (error) {
-    console.error("Error in update-profile API:", error);
+    console.error("Error in /api/update-profile API:", error);
     return new Response(
       JSON.stringify({ success: false, error: error.message }),
       { status: 500, headers: { "Content-Type": "application/json" } }

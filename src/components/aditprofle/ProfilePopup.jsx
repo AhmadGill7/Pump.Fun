@@ -1,4 +1,5 @@
 // ProfilePopup.jsx
+"use client";
 import { useState } from "react";
 import {
   Box,
