@@ -232,7 +232,7 @@ const CoinForm = ({ onClose }) => {
       }
     }
   };
-  
+
   return (
     <Box sx={{ minHeight: '100vh', backgroundColor: '#1a1a2a', padding: '40px', color: 'white' }}>
       <Button onClick={onClose} sx={{ /* styles remain the same */ }}>
@@ -252,19 +252,19 @@ const CoinForm = ({ onClose }) => {
 
           {/* File Upload */}
           <Typography variant='h5' sx={{ color: '#60A5FA', marginBottom: '8px', fontSize: '14px' }}>Image or video</Typography>
-            <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileSelect} accept="image/*,video/*" ref={coinImageRef} />
-            <label htmlFor="file-upload">
-              <FileUploadBox>
-                <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="17 8 12 3 7 8" />
-                    <line x1="12" y1="3" x2="12" y2="15" />
-                  </svg>
-                </Box>
-                <Typography variant='h5' sx={{ color: 'white' }}>Drag and drop an image or video</Typography>
-              </FileUploadBox>
-            </label>
+          <input type="file" id="file-upload" style={{ display: 'none' }} onChange={handleFileSelect} accept="image/*,video/*" ref={coinImageRef} />
+          <label htmlFor="file-upload">
+            <FileUploadBox>
+              <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                  <polyline points="17 8 12 3 7 8" />
+                  <line x1="12" y1="3" x2="12" y2="15" />
+                </svg>
+              </Box>
+              <Typography variant='h5' sx={{ color: 'white' }}>Drag and drop an image or video</Typography>
+            </FileUploadBox>
+          </label>
 
           {/* More Options */}
           <Button onClick={() => setShowMoreOptions(!showMoreOptions)} sx={{ color: '#60A5FA', textTransform: 'none', fontSize: '14px', marginTop: '20px', marginBottom: '20px', padding: 0 }}>
@@ -300,11 +300,7 @@ const MainHome = () => {
   const user = useSelector((state) => state.user.user);
 
   const handleStartCoin = () => {
-    if (!user?.walletAddress) {
-      toast.error("Please connect your wallet first");
-    } else if (user?.walletAddress) {
       setShowForm(true);
-    }
   }
   const handleGoBack = () => setShowForm(false);
 
@@ -318,29 +314,31 @@ const MainHome = () => {
             </Typography>
           </Box>
         )}
-        <img  src="/king-of-the-hill.webp" alt="king-of-the-hill" />
+        <img src="/king-of-the-hill.webp" alt="king-of-the-hill" />
       </Box>
-      <Link href="/Coinsdata" style={{ textDecoration: "none",  }}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center', mt: '10px', p: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
-          <Box>
-            <img src='/loin.png' alt="logo" style={{ maxWidth: '100%', height: 'auto' }} />
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center", width: "100%", mt: "20px" }}>
+        <Link href="/Coinsdata" style={{ textDecoration: "none", width: "400px" }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center', mt: '10px', p: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
+            <Box>
+              <img src='/loin.png' alt="logo" style={{ maxWidth: '100%', height: 'auto' }} />
+            </Box>
+            <Box>
+              <Typography variant="body1">
+                Created by test1  <span style={{ color: '#1AB75E' }}>5min</span> ago
+              </Typography>
+              <Typography variant="body1" color='#1AB75E'>
+                Marketcap:
+              </Typography>
+              <Typography variant="body1">
+                replies
+              </Typography>
+              <Typography variant="body1">
+                working for #Bitcoin [ticker:Bitcoin]
+              </Typography>
+            </Box>
           </Box>
-          <Box>
-            <Typography variant="body1">
-              Created by test1  <span style={{ color: '#1AB75E' }}>5min</span> ago
-            </Typography>
-            <Typography variant="body1" color='#1AB75E'>
-              Marketcap:
-            </Typography>
-            <Typography variant="body1">
-              replies
-            </Typography>
-            <Typography variant="body1">
-              working for #Bitcoin [ticker:Bitcoin]
-            </Typography>
-          </Box>
-        </Box>
-      </Link>
+        </Link>
+      </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, mt: 2, p: 1 }}>
         <TextField
