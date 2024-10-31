@@ -186,19 +186,16 @@ const ShowNavbar = () => {
               <Typography variant="body2">Support</Typography>
             </Button>
           </Box>
-
           {/* Middle Section - Transaction Info */}
           <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, width: '100%', marginTop: { xs: '10px', sm: '0' } }}>
-            <CustomButton ref={changingNav} sx={{ width: '100%', minHeight: '50px', marginBottom: { xs: '5px', sm: '0' } }}>
+            <CustomButton ref={changingNav} sx={{ width: '100%',minHeight: '50px', marginBottom: { xs: '5px', sm: '0' } }}>
               <Typography variant='h6' align="center">
                 FzkHzE bought {randomNum} SOL of Troilans
               </Typography>
             </CustomButton>
-
             <CustomBlueButton sx={{ width: '100%', minHeight: '50px' }} ref={changingNav2}>
               <Typography variant='h6' align="center">
                 {randomNum2}created BOT on 10/23/24
-
               </Typography>
             </CustomBlueButton>
           </Box>

@@ -1,4 +1,4 @@
-// /src/app/api/verify-email/route.js
+// /src/app/api/send-otp/route.js
 import dbConnect from "@/dbConnect";
 import User from "@/Model/Users";
 import { sendOtpEmail } from "@/app/api/lib/email";

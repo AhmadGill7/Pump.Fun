@@ -318,12 +318,12 @@ const MainHome = () => {
             </Typography>
           </Box>
         )}
-        <img s src="/king-of-the-hill.webp" alt="" />
+        <img  src="/king-of-the-hill.webp" alt="king-of-the-hill" />
       </Box>
       <Link href="/Coinsdata" style={{ textDecoration: "none",  }}>
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, alignItems: 'center', mt: '10px', p: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
           <Box>
-            <img src='/loin.png' alt="" style={{ maxWidth: '100%', height: 'auto' }} />
+            <img src='/loin.png' alt="logo" style={{ maxWidth: '100%', height: 'auto' }} />
           </Box>
           <Box>
             <Typography variant="body1">
