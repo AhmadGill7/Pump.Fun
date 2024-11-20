@@ -5,15 +5,20 @@ import User from "@/Model/Users";
 
 export async function POST(req) {
   try {
-    const { email, name, bio } = await req.json();
+    const { _id, name, bio} = await req.json();
+    console.log( _id, name, bio);
     await dbConnect();
 
     // Find user by email and update
     const user = await User.findOneAndUpdate(
-      { email },
+      { _id }, 
       { name, bio },
       { new: true } // Returns the updated document
     );
+    console.log(user,'backend')
+
+    console.log("User updated:", user);
+    
 
     if (user) {
       return new Response(

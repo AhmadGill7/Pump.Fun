@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
-import UserSlice from '@/store/usersSlice'
+import UserSlice from '@/Slices/usersSlice'
+import TokenSlice from '@/Slices/tokenSlice'
 
-// Define the store first, then export it
 const PumpStore = configureStore({
     reducer: {
         user: UserSlice,
+        token: TokenSlice,
     }
 });
 

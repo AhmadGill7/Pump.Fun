@@ -1,33 +1,24 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Box,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Box, Button, Dialog, DialogTitle, DialogContent, } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Link from "next/link";
 import { useAppKit } from "@reown/appkit/react";
 import { useAccount } from "wagmi";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import PumpStore from "@/store/store";
-import { addUser } from "@/store/usersSlice";
+import { addUser, newPage } from "@/Slices/usersSlice";
 import { useSelector } from "react-redux";
 import ProfilePopup from "../aditprofle/ProfilePopup";
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const CustomButton = styled(Button)(({ theme }) => ({
-  backgroundColor: theme.palette.warning.main,
-  color: theme.palette.common.black,
+  backgroundColor: theme?.palette?.warning?.main,
+  color: theme?.palette?.common?.black,
   fontSize: "14px",
   marginRight: "10px",
   borderRadius: "8px",
@@ -43,35 +34,28 @@ const CustomBlueButton = styled(Button)(({ theme }) => ({
   textTransform: "none",
 }));
 
-const Navbar = () => {
-  return (
-    <Provider store={PumpStore}>
-      <ShowNavbar />
-    </Provider>
-  );
-};
-
 const ShowNavbar = () => {
-  const [somesOpen, setsomesOpen] = useState(false);
+  const [howItWorksOpen, setHowItWorksOpen] = useState(false);
   const { open } = useAppKit();
   const { address } = useAccount();
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
-  console.log(user);
-
+  const [onAdvance, setOnAdvance] = useState(false);
   const shouldShowProfile = Boolean(user?.walletAddress || user?.email && user?.otp === null)
-  let [randomNum, setrandomNum] = useState('3.244')
-  let [randomNum2, setrandomNum2] = useState('7.244')
-
   let changingNav = useRef()
   let changingNav2 = useRef()
 
-
+  useEffect(() => {
+    pathname === '/advanced' ? setOnAdvance(false) : setOnAdvance(true)
+    dispatch(newPage(2))
+    setTimeout(() => {
+      dispatch(newPage(0))
+    }, 500);
+  }, [pathname])
 
   useEffect(() => {
     setInterval(() => {
-      let newNum = Math.round(Math.random() * 1000) / 1000
-      setrandomNum(newNum)
       changingNav?.current?.classList.add('animationDiv')
       setTimeout(() => {
         changingNav?.current?.classList.remove('animationDiv')
@@ -79,8 +63,6 @@ const ShowNavbar = () => {
     }, 5000);
 
     setInterval(() => {
-      let snewNum = Math.round(Math.random() * 1000) / 1000
-      setrandomNum2(snewNum)
 
       changingNav2?.current?.classList.add('animationDiv')
       setTimeout(() => {
@@ -91,11 +73,6 @@ const ShowNavbar = () => {
 
   useEffect(() => {
 
-    if (!address && user?.email) return
-
-    // if (user?.walletAddress || user?.email && user?.otp === null) {
-    //   setShouldShowProfile(true);
-    // }
     if (!address && !user?.email) return
     const saveWalletAddress = async () => {
       try {
@@ -115,11 +92,11 @@ const ShowNavbar = () => {
   }, [address, user?.email, dispatch]);
 
   const handleClickOpen = () => {
-    setsomesOpen(true);
+    setHowItWorksOpen(true);
   };
 
   const handleClose = () => {
-    setsomesOpen(false);
+    setHowItWorksOpen(false);
   };
 
   const [openProfilePopup, setOpenProfilePopup] = useState(false); // State for opening the popup
@@ -150,7 +127,9 @@ const ShowNavbar = () => {
               width: "100%",
             }}
           >
-            <Image src="/logo.png" alt="" width={50} height={50} />
+            <Link href="/">
+              <Image src="/logo.png" alt="" width={50} height={50} />
+            </Link>
 
             <Button
               sx={{
@@ -163,7 +142,7 @@ const ShowNavbar = () => {
             >
               <Typography variant="body2">How it works</Typography>
             </Button>
-            <Link href="/advanced">
+            {onAdvance && <Link href="/advanced">
               <Button
                 sx={{
                   color: "#9cd",
@@ -171,99 +150,101 @@ const ShowNavbar = () => {
                   fontSize: "14px",
                   margin: { xs: "5px 0", sm: "0 10px" },
                 }}
+                
+              onClick={() => dispatch(newPage(1))}
               >
-                <Typography variant="body2">Advanced</Typography>
-              </Button>
-            </Link>
+              <Typography variant="body2">Advanced</Typography>
+            </Button>
+            </Link>}
+          <Button
+            sx={{
+              color: "#9cd",
+              textTransform: "none",
+              fontSize: "14px",
+              margin: { xs: "5px 0", sm: "0 10px" },
+            }}>
+            <Typography variant="body2">Support</Typography>
+          </Button>
+        </Box>
+        {/* Middle Section - Transaction Info */}
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, width: '100%', marginTop: { xs: '10px', sm: '0' } }}>
+          <CustomButton ref={changingNav} sx={{ width: '100%', minHeight: '50px', marginBottom: { xs: '5px', sm: '0' }, display: { xs: 'none', md: 'block' } }}>
+            <Typography variant='h6' align="center">
+              FzkHzE bought {10344} SOL of Troilans
+            </Typography>
+          </CustomButton>
+          <CustomBlueButton sx={{ width: '100%', minHeight: '50px', display: { xs: 'none', md: 'block' } }} ref={changingNav2}>
+            <Typography variant='h6' align="center">
+              {0.0023}created BOT on 10/23/24
+            </Typography>
+          </CustomBlueButton>
+        </Box>
+
+        {/* Right Side - Connect Wallet */}
+
+        {shouldShowProfile ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", sm: "flex-end" },
+              width: "100%",
+              marginTop: { xs: "10px", sm: "0" },
+            }}
+          >
             <Button
               sx={{
                 color: "#9cd",
                 textTransform: "none",
                 fontSize: "14px",
-                margin: { xs: "5px 0", sm: "0 10px" },
+                background: "#1D4ED8",
+                padding: "15px 30px",
+                borderRadius: "50px",
               }}
+              onClick={handleOpen}
             >
-              <Typography variant="body2">Support</Typography>
+              Open Profile
+            </Button>
+            <ProfilePopup openn={openProfilePopup} onClose={handleClosed} />
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", sm: "flex-end" },
+              width: "100%",
+              marginTop: { xs: "10px", sm: "0" },
+            }}
+          >
+            <Button
+              sx={{
+                color: "#9cd",
+                textTransform: "none",
+                fontSize: "14px",
+                background: "#1D4ED8",
+                padding: "15px 30px",
+                borderRadius: "50px",
+              }}
+              onClick={() => open()}
+            ><Typography variant="h6">Connect Wallet</Typography>
             </Button>
           </Box>
-          {/* Middle Section - Transaction Info */}
-          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, width: '100%', marginTop: { xs: '10px', sm: '0' } }}>
-            <CustomButton ref={changingNav} sx={{ width: '100%',minHeight: '50px', marginBottom: { xs: '5px', sm: '0' } }}>
-              <Typography variant='h6' align="center">
-                FzkHzE bought {randomNum} SOL of Troilans
-              </Typography>
-            </CustomButton>
-            <CustomBlueButton sx={{ width: '100%', minHeight: '50px' }} ref={changingNav2}>
-              <Typography variant='h6' align="center">
-                {randomNum2}created BOT on 10/23/24
-              </Typography>
-            </CustomBlueButton>
-          </Box>
+        )}
+      </Toolbar>
+    </AppBar >
 
-          {/* Right Side - Connect Wallet */}
-
-          {shouldShowProfile ? (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "center", sm: "flex-end" },
-                width: "100%",
-                marginTop: { xs: "10px", sm: "0" },
-              }}
-            >
-              <Button
-                sx={{
-                  color: "#9cd",
-                  textTransform: "none",
-                  fontSize: "14px",
-                  background: "#1D4ED8",
-                  padding: "15px 30px",
-                  borderRadius: "50px",
-                }}
-                onClick={handleOpen}
-              >
-                Open Profile
-              </Button>
-              <ProfilePopup openn={openProfilePopup} onClose={handleClosed} />
-            </Box>
-          ) : (
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: { xs: "center", sm: "flex-end" },
-                width: "100%",
-                marginTop: { xs: "10px", sm: "0" },
-              }}
-            >
-              <Button
-                sx={{
-                  color: "#9cd",
-                  textTransform: "none",
-                  fontSize: "14px",
-                  background: "#1D4ED8",
-                  padding: "15px 30px",
-                  borderRadius: "50px",
-                }}
-                onClick={() => open()}
-              ><Typography variant="h6">Connect Wallet</Typography>
-              </Button>
-            </Box>
-          )}
-        </Toolbar>
-      </AppBar>
-
-      {/* How It Works Dialog */}
-      <Dialog
-        open={somesOpen} // Control visibility with somesOpen
-        onClose={handleClose}
-        maxWidth="md"
-        fullWidth
-        PaperProps={{
-          sx: {
-            backgroundColor: "transparent",
-            boxShadow: "none",
+      {/* How It Works Dialog */ }
+      <Dialog Dialog
+  open = { howItWorksOpen } // Control visibility with howItWorksOpen
+  onClose = { handleClose }
+  maxWidth = "md"
+  fullWidth
+  PaperProps = {{
+    sx: {
+      backgroundColor: "transparent",
+        boxShadow: "none",
           },
-        }}
+  }
+}
       >
         <DialogTitle>
           <Typography variant="subtitle1" sx={{ textAlign: "center" }}>
@@ -324,8 +305,16 @@ const ShowNavbar = () => {
             </Button>
           </Box>
         </DialogContent>
-      </Dialog>
+      </Dialog >
     </>
+  );
+};
+
+const Navbar = () => {
+  return (
+    <Provider store={PumpStore}>
+      <ShowNavbar />
+    </Provider>
   );
 };
 

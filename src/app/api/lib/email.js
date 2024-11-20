@@ -17,5 +17,5 @@ export const sendOtpEmail = async (email, otp) => {
     text: `Your OTP code is ${otp}`,
   };
 
-  await transporter.sendMail(mailOptions);
+  await transporter.sendMail( );
 };

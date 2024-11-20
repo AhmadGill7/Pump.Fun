@@ -199,9 +199,9 @@ const Trades = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {transactions?.map((row) => (
+                        {transactions?.map((row,index) => (
                             <TableRow
-                                key={row?.hash}
+                                key={index}
                                 sx={{
                                     '&:hover': {
                                         backgroundColor: '#2E303A',

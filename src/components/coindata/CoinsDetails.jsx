@@ -1,29 +1,55 @@
+import { newPage } from '@/Slices/usersSlice'
+import PumpStore from '@/store/store'
 import { Avatar, Box, Button, LinearProgress, List, ListItem, Typography } from '@mui/material'
-import React from 'react'
+import axios from 'axios'
+import { useParams } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { Provider } from 'react-redux'
+import { useDispatch } from 'react-redux'
+
+
 
 const CoinsDetails = () => {
+
+    let params = useParams()
+    let [TokenDetails, setTokenDetails] = useState({})
+    let dispatch = useDispatch()
+
+    useEffect(() => {
+        
+        axios.post('/api/WhichToken', { tokenAddress: params.TAdress }).then((resp) => {
+            setTokenDetails(resp.data.TokenDetail)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }, [])
+
+
     return (
-        <div>
+        <>
             <Box
                 sx={{
                     padding: 3,
-                    maxWidth: 400,
                     backgroundColor: '#1B1D28',
                     borderRadius: '0px',
                     color: '#9CA3AF',
+                    width: "100%",
+                    mt: '20px'
+
                 }}
             >
                 {/* Header Section */}
-                <Box display="flex" alignItems="center" sx={{ marginBottom: 2 }}>
+                <Box display="flex" alignItems="center" sx={{ marginBottom: 2, width: '100%', }}>
                     <Avatar
-                        src="https://pump.mypinata.cloud/ipfs/QmcrsXmWizh1y1p5UPEtJ84UHQzkN6HcQhhrAdq1no1ChD?img-width=256&img-dpr=2&img-onerror=redirect"
+                        src={TokenDetails.file}
                         sx={{ width: 100, height: 100, marginRight: 2 }}
                     />
                     <Box>
-                        <Typography variant="h6">Solana Is Gonna Moon Again</Typography>
-                        <Typography variant="body2" color="#9CA3AF">
-                            (ticker: SIGMA)
-                        </Typography>
+                        <Typography variant="h6">{TokenDetails.name} (ticker:{TokenDetails?.ticker})</Typography>
+                        {/* <Typography variant="body2" color="#9CA3AF">
+                            
+                        </Typography> */}
+                        <Typography variant="h6">{TokenDetails.description}</Typography>
                     </Box>
                 </Box>
 
@@ -104,7 +130,7 @@ const CoinsDetails = () => {
                     </ListItem>
                 </List>
             </Box>
-        </div>
+        </>
     )
 }
 

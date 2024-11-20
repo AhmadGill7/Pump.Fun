@@ -1,6 +1,7 @@
 import { cookieStorage, createStorage, http } from '@wagmi/core'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 
+
 export const projectId = "d4beca8c1c8fc39768e00c82445bb2df"
 
 if (!projectId) {

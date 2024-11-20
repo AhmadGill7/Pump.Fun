@@ -2,6 +2,8 @@
 import dbConnect from "@/dbConnect";
 import User from "@/Model/Users";
 import { sendOtpEmail } from "@/app/api/lib/email";
+const { v4: uuid } = require('uuid');
+
 
 export async function POST(req) {
   try {
@@ -32,7 +34,10 @@ export async function POST(req) {
         );
       }
 
-      const dataToSave = { email , otp , name: "pump", image: "", bio: "i loved pupm" , walletAddress: ""  , file:null};
+    const idd = uuid();
+
+
+      const dataToSave = { email , otp , name: "pump", image: "", bio: "i loved pupm" , walletAddress: ""  , tokens: [], userId: idd, };
 
       const user = await User.create(dataToSave);
       await sendOtpEmail(email, otp);

@@ -1,7 +1,12 @@
+
 const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
+    userId: {
+      type: String,
+      unique: true,
+    },
     walletAddress: {
       type: String,
       unique: true,
@@ -14,6 +19,7 @@ const UserSchema = new mongoose.Schema(
     name: {
       type: String,
       default: null,
+      unique: true,
       require: true,
     },
     bio: {
@@ -30,11 +36,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-    file: {
-       type: Array,
-        default: [] 
-      },
-  },
+},
   {
     timestamps: true,
   }

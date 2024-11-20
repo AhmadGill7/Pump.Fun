@@ -1,119 +1,57 @@
-import { Box, Typography } from '@mui/material'
-import Image from 'next/image'
-import React from 'react'
+import { newPage } from '@/Slices/usersSlice'
+import PumpStore from '@/store/store'
+import { Box, CircularProgress, Typography } from '@mui/material'
+import axios from 'axios'
+import Link from 'next/link'
+import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { Provider } from 'react-redux'
 
 const Abouttograduate = () => {
+    return <Provider store={PumpStore}>
+        <ShowAbouttograduate />
+    </Provider>
+}
 
-    let aboutToGraduate = [
-        { id: 1, name: "Bitcoin", image: "coin1.png", mc: "$800B", volume: "$35B", timeAgo: "1 hour ago" },
-        { id: 2, name: "Ethereum", image: "coin2.png", mc: "$380B", volume: "$18B", timeAgo: "2 hours ago" },
-        { id: 3, name: "Cardano", image: "coin3.png", mc: "$70B", volume: "$1.5B", timeAgo: "5 hours ago" },
-        // Add more coins up to 20 here...
-        { id: 4, name: "Solana", image: "coin4.png", mc: "$50B", volume: "$3B", timeAgo: "10 hours ago" },
-        { id: 5, name: "Ripple", image: "coin5.png", mc: "$30B", volume: "$1B", timeAgo: "12 hours ago" },
-        { id: 6, name: "Litecoin", image: "coin6.png", mc: "$15B", volume: "$500M", timeAgo: "15 hours ago" },
-        { id: 7, name: "Polkadot", image: "coin7.png", mc: "$10B", volume: "$250M", timeAgo: "18 hours ago" },
-        { id: 8, name: "Dogecoin", image: "coin8.png", mc: "$8B", volume: "$200M", timeAgo: "20 hours ago" },
-        { id: 9, name: "Chainlink", image: "coin9.png", mc: "$5B", volume: "$150M", timeAgo: "1 day ago" },
-        { id: 10, name: "Shiba Inu", image: "coin10.png", mc: "$2B", volume: "$100M", timeAgo: "1 day ago" },
-        // Continue adding items until you reach 20...
-    ]
+const ShowAbouttograduate = () => {
+    const [EveryTokens, setEveryTokens] = useState([])
+    let [ShowLoading, setShowLoading] = useState(false)
+    let dispatch = useDispatch()
 
-    let scrollerKaData = [
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
+    function pageLoaderHandler() {
+        dispatch(newPage(1))
+    }
 
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
+    useEffect(() => {
+        axios.post('/api/getAllTokens').then((resp) => {
+            setEveryTokens(resp.data.AllTokens)
+            setShowLoading(true)
+        }).catch((error) => {
+            console.log(error)
+        })
 
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
+    }, [])
 
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-        {
-            time: '5h ago',
-            img: 'https://pump.mypinata.cloud/ipfs/QmZJKFtE77rhp9peVWdKGQo3sqUzvqYWUxYMKixBNq3y1P?img-width=62&img-dpr=2&img-onerror=redirect',
-            MC: '102.55k',
-            V: '60.4k'
-
-        },
-
-    ]
 
     return (
-        <Box sx={{ overflowX: 'auto', display: 'flex', gap: 2, padding: 2, }} className='newScroll'>
-            {scrollerKaData.map((data) => {
-                return <Box key={data?.time} sx={{ minWidth: '180px', minHeight: "80px", display: 'flex', background: '#1F2937', alignItems: 'center', px: '.5rem', borderRadius: '10px' }}>
-                    <img alt='img' src={data?.img} sx={{ borderRadius: '10px' }} width={70} height={70} />
-                    <Box sx={{ pl: '.5rem', fontSize: '.9em' }}>
-                        <Typography sx={{ fontSize: '.9em', color: 'white' }}><span style={{ color: 'blue' }}>MC</span> {data?.MC}</Typography>
-                        <Typography sx={{ fontSize: '.9em', color: 'white' }}><span style={{ color: 'blue' }}>V</span> {data?.V}</Typography>
-                        <Typography sx={{ fontSize: '.9em', color: 'gray' }}>{data?.time}</Typography>
-                    </Box>
-                </Box>
-            })}
-        </Box>
+        <>
+            {ShowLoading ? <Box sx={{ overflowX: 'auto', display: 'flex', gap: 2, padding: 2, }} className='newScroll'>
+                {EveryTokens?.map((data, index) => {
+                    return <Link key={index} href={'/Coinsdata/' + data.tokenAddress} onClick={pageLoaderHandler}>
+                        <Box sx={{ minWidth: '180px', minHeight: "80px", display: 'flex', background: '#1F2937', alignItems: 'center', px: '.5rem', borderRadius: '10px' }}>
+                            <img alt='img' src={data?.file} sx={{ borderRadius: '10px' }} width={70} height={70} />
+                            <Box sx={{ pl: '.5rem', fontSize: '.9em' }}>
+                                <Typography sx={{ fontSize: '.9em', color: 'white' }}><span style={{ color: 'blue' }}>MC</span> {data?.MarketCap || '4.6k'}</Typography>
+                                <Typography sx={{ fontSize: '.9em', color: 'white' }}><span style={{ color: 'blue' }}>V</span> {data?.Volume || '1.1k'}</Typography>
+                                <Typography sx={{ fontSize: '.9em', color: 'gray' }}>{Math.floor((new Date() - new Date(data?.createdAt)) / (1000 * 60 * 60))} hours ago</Typography>
+                            </Box>
+                        </Box>
+                    </Link>
+                })}
+            </Box> : <Box sx={{display:'flex',justifyContent:'center',alignItems:'center' ,width:'100%',overflow:'hidden'}}>
+                <CircularProgress sx={{margin:'auto',display:'block'}}/>
+            </Box>}
+        </>
     )
 }
 

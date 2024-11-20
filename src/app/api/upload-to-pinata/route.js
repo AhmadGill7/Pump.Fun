@@ -8,6 +8,7 @@ export async function POST(req) {
   const formData = await req.formData();
   const file = formData.get("file");
   const email = formData.get("email");
+  const walletAddress = formData.get("walletAddress");
 
   // Convert the file to binary for Pinata
   const data = new FormData();
@@ -18,8 +19,8 @@ export async function POST(req) {
     const response = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", data, {
       headers: {
         "Content-Type": `multipart/form-data`,
-        pinata_api_key: "2f4751f2d2632f6cf4f7",
-        pinata_secret_api_key: "60f785d39ffa64ad2d30c2b27649bfac8c7b7a28fdef26de3cab0d7dffd2492b",
+        pinata_api_key: process.env.NEXT_PUBLIC_PINATA_API_KEY,
+        pinata_secret_api_key: process.env.NEXT_PUBLIC_PINATA_SECRET_API_KEY,
       },
     });
 
@@ -28,7 +29,7 @@ export async function POST(req) {
 
     // Find user by email and update their profile image
     await User.findOneAndUpdate(
-      { email },
+      { $or: [{ email }, { walletAddress }] }, 
       { image: image },
       { new: true }
     );

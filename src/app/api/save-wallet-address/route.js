@@ -1,6 +1,7 @@
 // /src/app/api/save-wallet-address/route.js
 import dbConnect from "@/dbConnect";
 import User from "@/Model/Users";
+const { v4: uuid } = require('uuid');
 
 export async function POST(req) {
   try {
@@ -9,16 +10,16 @@ export async function POST(req) {
 
     await dbConnect();
 
+    // Step 1: Check if the wallet address already exists for a user (for login)
     if (address) {
-      const existingUser = await User.findOne({ walletAddress: address });
-
-      if (existingUser) {
+      const existingUserByAddress = await User.findOne({ walletAddress: address });
+      console.log("existingUserByAddress:", existingUserByAddress);
+      if (existingUserByAddress) {
         return new Response(
           JSON.stringify({
             success: true,
             message: "Logged In",
-            user: existingUser,
-            walletAddress: address,
+            user: existingUserByAddress,
           }),
           {
             status: 200,
@@ -28,63 +29,51 @@ export async function POST(req) {
       }
     }
 
-    if (!email && address) {
-      const user = await User.create({
-        walletAddress: address,
-        email: null,
-        name: null,
-        bio: null,
-        otp: null,
-        image: null,
-        file: null,
-      });
+    // Step 2: If no wallet address is found, check for an email to update or create a new user
+    if (email) {
+      const existingUserByEmail = await User.findOne({ email });
 
-      return new Response(
-        JSON.stringify({
-          success: true,
-          message: "Wallet address saved",
-          user,
-        }),
-        {
-          status: 201,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      if (existingUserByEmail) {
+        // Update the wallet address for an existing email-based user
+        existingUserByEmail.walletAddress = address;
+        await existingUserByEmail.save();
+
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: "Wallet address added to existing user by email",
+            user: existingUserByEmail,
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+      }
     }
-    const user = await User.findOne({ email });
 
-    if (!user) {
-      const newUser = await User.create({
-        walletAddress: address || null,
-        email: email || null,
-        name: "pump",
-        bio: "i loved pump",
-        otp: null,
-        image: null,
-      });
+    const idd = uuid();
 
-      return new Response(
-        JSON.stringify({
-          success: true,
-          message: "New user created with wallet address",
-          user: newUser,
-        }),
-        {
-          status: 201,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-    }
-    user.walletAddress = address || null;
-    await user.save();
+    // Step 3: Create a new user if wallet address or email doesn't exist
+    const newUser = await User.create({
+      userId: idd, 
+      walletAddress: address || null,
+      email: email || null,
+      name: "pump",
+      bio: "I loved pump",
+      otp: null,
+      image: null,
+      tokens: [],
+    });
+
     return new Response(
       JSON.stringify({
         success: true,
-        message: "Wallet address added to user",
-        user,
+        message: "New user created",
+        user: newUser,
       }),
       {
-        status: 200,
+        status: 201,
         headers: { "Content-Type": "application/json" },
       }
     );

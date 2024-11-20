@@ -7,6 +7,7 @@ import {
   Modal,
   TextField,
   IconButton,
+  CircularProgress,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { styled } from "@mui/material/styles";
@@ -14,8 +15,9 @@ import { useSelector } from "react-redux";
 import { useAppKit } from "@reown/appkit/react";
 import { useAccount, useDisconnect } from "wagmi";
 import { useDispatch } from "react-redux";
-import { addUser, clearUser } from "@/store/usersSlice";
+import { addUser, clearUser } from "@/Slices/usersSlice";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const StyledModal = styled(Modal)({
   display: "flex",
@@ -85,18 +87,24 @@ const ButtonContainer = styled(Box)({
 
 const ProfileEditModal = ({ open, onClose, initialData }) => {
   const user = useSelector((state) => state.user?.user);
+  console.log(user,"redux login");
+  
   const [name, setName] = useState(user?.name || "");
   const [bio, setBio] = useState(user?.bio || "");
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false); // Loading state
+
 
   const onSave = async () => {
     try {
       const response = await axios.post("/api/save-name-bio", {
-        email: user?.email,
+        _id:user?._id,
         name,
         bio,
       });
       if (response?.data?.success) {
+
+        toast.success(response.data.message);
 
         dispatch(addUser(response?.data?.user));
       }
@@ -114,6 +122,10 @@ const ProfileEditModal = ({ open, onClose, initialData }) => {
       const formData = new FormData();
       formData.append("file", file);
       formData.append("email", user?.email);
+      formData.append("walletAddress", user?.walletAddress);
+
+
+      setLoading(true);
 
       // Send the file to the backend to upload to IPFS and save the address
       try {
@@ -121,11 +133,15 @@ const ProfileEditModal = ({ open, onClose, initialData }) => {
         if (response?.data?.success) {
           setProfilePhoto(response?.data?.image); // Update profile photo
 
+          toast.success("Image Upload Successfuly ")
+
           dispatch(addUser(response?.data?.image));
         }
       } catch (error) {
         console.error("Error uploading image:", error);
-      }
+      } finally {
+      setLoading(false); // Stop loading
+    }
     }
   };
 
@@ -149,6 +165,24 @@ const ProfileEditModal = ({ open, onClose, initialData }) => {
               position: "relative",
             }}
           />
+            {loading && (
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            // backgroundColor: "rgba(255, 255, 255, 0.5)",
+            borderRadius: "50%",
+          }}
+        >
+          <CircularProgress size={24} />
+        </Box>
+      )}
           <EditIconWrapper>
             <label htmlFor="upload-photo" style={{ cursor: "pointer" }}>
               <EditIcon sx={{ fontSize: 20 }} />
@@ -235,6 +269,7 @@ const ProfilePopup = ({ openn, onClose }) => {
   const user = useSelector((state) => state.user?.user);
 
   const handleConnect = async () => {
+    onClose();
     try {
       const walletAddress = await open();
       if (walletAddress && user?.email) {
@@ -297,9 +332,9 @@ const ProfilePopup = ({ openn, onClose }) => {
               }}
             />
             <Box sx={{ flexGrow: 1 }}>
-              <Typography variant="subtitle1">pump</Typography>
+              <Typography variant="subtitle1">{user?.name}</Typography>
               <Typography variant="body2" sx={{ color: "#fff" }}>
-                love
+                {user?.bio}
               </Typography>
             </Box>
             <Button
@@ -379,10 +414,6 @@ const ProfilePopup = ({ openn, onClose }) => {
       <ProfileEditModal
         open={editModalOpen}
         onClose={handleEditClose}
-        initialData={{
-          username: "pump",
-          bio: "love pump",
-        }}
       />
     </>
   );
