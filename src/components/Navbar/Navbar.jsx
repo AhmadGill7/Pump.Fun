@@ -52,7 +52,7 @@ const ShowNavbar = () => {
     setTimeout(() => {
       dispatch(newPage(0))
     }, 500);
-  }, [pathname])
+  }, [pathname, dispatch])
 
   useEffect(() => {
     setInterval(() => {
@@ -150,101 +150,101 @@ const ShowNavbar = () => {
                   fontSize: "14px",
                   margin: { xs: "5px 0", sm: "0 10px" },
                 }}
-                
-              onClick={() => dispatch(newPage(1))}
+
+                onClick={() => dispatch(newPage(1))}
               >
-              <Typography variant="body2">Advanced</Typography>
-            </Button>
+                <Typography variant="body2">Advanced</Typography>
+              </Button>
             </Link>}
-          <Button
-            sx={{
-              color: "#9cd",
-              textTransform: "none",
-              fontSize: "14px",
-              margin: { xs: "5px 0", sm: "0 10px" },
-            }}>
-            <Typography variant="body2">Support</Typography>
-          </Button>
-        </Box>
-        {/* Middle Section - Transaction Info */}
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, width: '100%', marginTop: { xs: '10px', sm: '0' } }}>
-          <CustomButton ref={changingNav} sx={{ width: '100%', minHeight: '50px', marginBottom: { xs: '5px', sm: '0' }, display: { xs: 'none', md: 'block' } }}>
-            <Typography variant='h6' align="center">
-              FzkHzE bought {10344} SOL of Troilans
-            </Typography>
-          </CustomButton>
-          <CustomBlueButton sx={{ width: '100%', minHeight: '50px', display: { xs: 'none', md: 'block' } }} ref={changingNav2}>
-            <Typography variant='h6' align="center">
-              {0.0023}created BOT on 10/23/24
-            </Typography>
-          </CustomBlueButton>
-        </Box>
-
-        {/* Right Side - Connect Wallet */}
-
-        {shouldShowProfile ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "center", sm: "flex-end" },
-              width: "100%",
-              marginTop: { xs: "10px", sm: "0" },
-            }}
-          >
             <Button
               sx={{
                 color: "#9cd",
                 textTransform: "none",
                 fontSize: "14px",
-                background: "#1D4ED8",
-                padding: "15px 30px",
-                borderRadius: "50px",
+                margin: { xs: "5px 0", sm: "0 10px" },
+              }}>
+              <Typography variant="body2">Support</Typography>
+            </Button>
+          </Box>
+          {/* Middle Section - Transaction Info */}
+          <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: { xs: 'column', sm: 'row' }, width: '100%', marginTop: { xs: '10px', sm: '0' } }}>
+            <CustomButton ref={changingNav} sx={{ width: '100%', minHeight: '50px', marginBottom: { xs: '5px', sm: '0' }, display: { xs: 'none', md: 'block' } }}>
+              <Typography variant='h6' align="center">
+                FzkHzE bought {10344} SOL of Troilans
+              </Typography>
+            </CustomButton>
+            <CustomBlueButton sx={{ width: '100%', minHeight: '50px', display: { xs: 'none', md: 'block' } }} ref={changingNav2}>
+              <Typography variant='h6' align="center">
+                {0.0023}created BOT on 10/23/24
+              </Typography>
+            </CustomBlueButton>
+          </Box>
+
+          {/* Right Side - Connect Wallet */}
+
+          {shouldShowProfile ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: { xs: "center", sm: "flex-end" },
+                width: "100%",
+                marginTop: { xs: "10px", sm: "0" },
               }}
-              onClick={handleOpen}
             >
-              Open Profile
-            </Button>
-            <ProfilePopup openn={openProfilePopup} onClose={handleClosed} />
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: { xs: "center", sm: "flex-end" },
-              width: "100%",
-              marginTop: { xs: "10px", sm: "0" },
-            }}
-          >
-            <Button
+              <Button
+                sx={{
+                  color: "#9cd",
+                  textTransform: "none",
+                  fontSize: "14px",
+                  background: "#1D4ED8",
+                  padding: "15px 30px",
+                  borderRadius: "50px",
+                }}
+                onClick={handleOpen}
+              >
+                Open Profile
+              </Button>
+              <ProfilePopup openn={openProfilePopup} onClose={handleClosed} />
+            </Box>
+          ) : (
+            <Box
               sx={{
-                color: "#9cd",
-                textTransform: "none",
-                fontSize: "14px",
-                background: "#1D4ED8",
-                padding: "15px 30px",
-                borderRadius: "50px",
+                display: "flex",
+                justifyContent: { xs: "center", sm: "flex-end" },
+                width: "100%",
+                marginTop: { xs: "10px", sm: "0" },
               }}
-              onClick={() => open()}
-            ><Typography variant="h6">Connect Wallet</Typography>
-            </Button>
-          </Box>
-        )}
-      </Toolbar>
-    </AppBar >
+            >
+              <Button
+                sx={{
+                  color: "#9cd",
+                  textTransform: "none",
+                  fontSize: "14px",
+                  background: "#1D4ED8",
+                  padding: "15px 30px",
+                  borderRadius: "50px",
+                }}
+                onClick={() => open()}
+              ><Typography variant="h6">Connect Wallet</Typography>
+              </Button>
+            </Box>
+          )}
+        </Toolbar>
+      </AppBar >
 
-      {/* How It Works Dialog */ }
+      {/* How It Works Dialog */}
       <Dialog Dialog
-  open = { howItWorksOpen } // Control visibility with howItWorksOpen
-  onClose = { handleClose }
-  maxWidth = "md"
-  fullWidth
-  PaperProps = {{
-    sx: {
-      backgroundColor: "transparent",
-        boxShadow: "none",
+        open={howItWorksOpen} // Control visibility with howItWorksOpen
+        onClose={handleClose}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: {
+            backgroundColor: "transparent",
+            boxShadow: "none",
           },
-  }
-}
+        }
+        }
       >
         <DialogTitle>
           <Typography variant="subtitle1" sx={{ textAlign: "center" }}>

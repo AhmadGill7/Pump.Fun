@@ -362,18 +362,19 @@ const ShowNewlycreated = () => {
                         </TableRow>
                     </TableHead>
                     {ShowLoading ? <TableBody>
-                        {EveryTokens.map((token, index) => {
+                        {EveryTokens?.map((token, index) => {
                             if (
                                 Number(MarketCap.from.replace("k", "")) * 1000 <= Number(String(token.MarketCap).replace("k", "")) * 1000 &&
                                 Number(MarketCap.to.replace("k", "")) * 1000 >= Number(String(token.MarketCap).replace("k", "")) * 1000 ||
                                 Number(Volume.from.replace("k", "")) * 1000 <= Number(String(token.Volume).replace("k", "")) * 1000 &&
                                 Number(Volume.to.replace("k", "")) * 1000 >= Number(String(token.Volume).replace("k", ""))
                             ) {
-                             return <TableRow onClick={() => {
-                                    dispatch(newPage(1))
-                                    router.push(`/Coinsdata/${token.tokenAddress}`)
-                                }
-                                } sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.03)' } }}>
+                                return <TableRow key={index}
+                                    onClick={() => {
+                                        dispatch(newPage(1))
+                                        router.push(`/Coinsdata/${token.tokenAddress}`)
+                                    }
+                                    } sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.03)' } }}>
                                     <TableCell sx={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
                                         <Box sx={{ display: 'flex', gap: 2 }}>
                                             <img src={token?.file} alt={token?.name} style={{ width: 48, height: 48, borderRadius: 8 }} />
@@ -465,10 +466,10 @@ const ShowNewlycreated = () => {
                                             display: 'block'
                                         }}
                                     >
-                                        {token.allComments.map((data, index) => {
+                                        {token?.allComments?.map((data, index) => {
 
                                             return (
-                                                <Box sx={{ display: 'flex', alignItems: 'center', mt: '5px', overflow: 'hidden' }} key={index}>
+                                                <Box key={index} sx={{ display: 'flex', alignItems: 'center', mt: '5px', overflow: 'hidden' }}>
                                                     <Box sx={{ display: 'flex', alignItems: 'center', mr: '5px' }}>
                                                         <img
                                                             alt="img"
@@ -508,9 +509,8 @@ const ShowNewlycreated = () => {
                                         </Typography>
                                     </TableCell>
                                 </TableRow>
-
                             } else if (Number(MarketCap.from.replace("k", "")) == 0 && Number(MarketCap.to.replace("k", "")) == 0 && Number(Volume.from.replace("k", "")) == 0 && Number(Volume.from.replace("k", "")) == 0) {
-                                return <TableRow onClick={() => router.push(`/Coinsdata/${token.tokenAddress}`)} sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.03)' } }}>
+                                return <TableRow key={index} onClick={() => router.push(`/Coinsdata/${token.tokenAddress}`)} sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.03)' } }}>
                                     <TableCell sx={{ borderBottom: '1px solid rgba(255, 255, 255, 0.05)' }}>
                                         <Box sx={{ display: 'flex', gap: 2 }}>
                                             <img src={token?.file} alt={token?.name} style={{ width: 48, height: 48, borderRadius: 8 }} />
@@ -652,7 +652,7 @@ const ShowNewlycreated = () => {
                             <CircularProgress sx={{ margin: 'auto', display: 'block' }} />
                         </Box>
                     </TableBody>}
-            </Table>
+                </Table>
             </TableContainer>
         </Box >
     );
