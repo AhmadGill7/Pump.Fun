@@ -54,8 +54,8 @@ importers:
         specifier: ^3.5.2
         version: 3.5.2
       mongoose:
-        specifier: ^8.8.0
-        version: 8.8.0
+        specifier: ^8.8.3
+        version: 8.8.3
       next:
         specifier: 15.0.3
         version: 15.0.3(@babel/core@7.26.0)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react@19.0.0-rc-69d4b800-20241021)
@@ -4021,8 +4021,8 @@ packages:
       socks:
         optional: true
 
-  mongoose@8.8.0:
-    resolution: {integrity: sha512-KluvgwnQB1GPOYZZXUHJRjS1TW6xxwTlf/YgjWExuuNanIe3W7VcR7dDXQVCIRk8L7NYge8EnoTcu2grWtN+XQ==}
+  mongoose@8.8.3:
+    resolution: {integrity: sha512-/I4n/DcXqXyIiLRfAmUIiTjj3vXfeISke8dt4U4Y8Wfm074Wa6sXnQrXN49NFOFf2mM1kUdOXryoBvkuCnr+Qw==}
     engines: {node: '>=16.20.1'}
 
   motion@10.16.2:
@@ -8089,6 +8089,56 @@ snapshots:
       loupe: 3.1.2
       tinyrainbow: 1.2.0
 
+  '@wagmi/connectors@5.3.7(@types/node@22.9.0)(@types/react@18.3.12)(@wagmi/core@2.14.4(@tanstack/query-core@5.59.20)(@types/react@18.3.12)(immer@10.1.1)(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.3)(use-sync-external-store@1.2.0(react@19.0.0-rc-69d4b800-20241021))(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)))(bufferutil@4.0.8)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10))(react@19.0.0-rc-69d4b800-20241021)(terser@5.36.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)':
+    dependencies:
+      '@coinbase/wallet-sdk': 4.2.1(@types/node@22.9.0)(terser@5.36.0)
+      '@metamask/sdk': 0.30.1(bufferutil@4.0.8)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10))(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10)
+      '@safe-global/safe-apps-provider': 0.18.3(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
+      '@safe-global/safe-apps-sdk': 9.1.0(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
+      '@wagmi/core': 2.14.4(@tanstack/query-core@5.59.20)(@types/react@18.3.12)(immer@10.1.1)(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.3)(use-sync-external-store@1.2.0(react@19.0.0-rc-69d4b800-20241021))(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
+      '@walletconnect/ethereum-provider': 2.17.0(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10)
+      cbw-sdk: '@coinbase/wallet-sdk@3.9.3'
+      viem: 2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)
+    optionalDependencies:
+      typescript: 5.6.3
+    transitivePeerDependencies:
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@edge-runtime/vm'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@react-native-async-storage/async-storage'
+      - '@types/node'
+      - '@types/react'
+      - '@upstash/redis'
+      - '@vercel/kv'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - bufferutil
+      - encoding
+      - happy-dom
+      - ioredis
+      - jsdom
+      - less
+      - lightningcss
+      - msw
+      - react
+      - react-dom
+      - react-native
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - utf-8-validate
+      - zod
+
   '@wagmi/connectors@5.3.7(@types/node@22.9.0)(@types/react@18.3.12)(@wagmi/core@2.14.4(@tanstack/query-core@5.59.20)(@types/react@18.3.12)(immer@10.1.1)(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.3)(use-sync-external-store@1.2.2(react@19.0.0-rc-69d4b800-20241021))(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)))(bufferutil@4.0.8)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10))(react@19.0.0-rc-69d4b800-20241021)(terser@5.36.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)':
     dependencies:
       '@coinbase/wallet-sdk': 4.2.1(@types/node@22.9.0)(terser@5.36.0)
@@ -9371,7 +9421,7 @@ snapshots:
       debug: 4.3.7
       enhanced-resolve: 5.17.1
       eslint: 9.14.0(jiti@2.4.0)
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0))
       fast-glob: 3.3.2
       get-tsconfig: 4.8.1
       is-bun-module: 1.2.1
@@ -9384,7 +9434,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0)):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0)):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -9406,7 +9456,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.14.0(jiti@2.4.0)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@9.14.0(jiti@2.4.0))
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@9.14.0(jiti@2.4.0)))(eslint@9.14.0(jiti@2.4.0))
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -10652,7 +10702,7 @@ snapshots:
       bson: 6.9.0
       mongodb-connection-string-url: 3.0.1
 
-  mongoose@8.8.0:
+  mongoose@8.8.3:
     dependencies:
       bson: 6.9.0
       kareem: 2.6.3
@@ -12057,7 +12107,7 @@ snapshots:
   wagmi@2.12.29(@tanstack/query-core@5.59.20)(@tanstack/react-query@5.59.20(react@19.0.0-rc-69d4b800-20241021))(@types/node@22.9.0)(@types/react@18.3.12)(bufferutil@4.0.8)(immer@10.1.1)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10))(react@19.0.0-rc-69d4b800-20241021)(terser@5.36.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8):
     dependencies:
       '@tanstack/react-query': 5.59.20(react@19.0.0-rc-69d4b800-20241021)
-      '@wagmi/connectors': 5.3.7(@types/node@22.9.0)(@types/react@18.3.12)(@wagmi/core@2.14.4(@tanstack/query-core@5.59.20)(@types/react@18.3.12)(immer@10.1.1)(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.3)(use-sync-external-store@1.2.2(react@19.0.0-rc-69d4b800-20241021))(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)))(bufferutil@4.0.8)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10))(react@19.0.0-rc-69d4b800-20241021)(terser@5.36.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)
+      '@wagmi/connectors': 5.3.7(@types/node@22.9.0)(@types/react@18.3.12)(@wagmi/core@2.14.4(@tanstack/query-core@5.59.20)(@types/react@18.3.12)(immer@10.1.1)(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.3)(use-sync-external-store@1.2.0(react@19.0.0-rc-69d4b800-20241021))(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8)))(bufferutil@4.0.8)(react-dom@19.0.0-rc-69d4b800-20241021(react@19.0.0-rc-69d4b800-20241021))(react-native@0.76.1(@babel/core@7.26.0)(@babel/preset-env@7.26.0(@babel/core@7.26.0))(@types/react@18.3.12)(bufferutil@4.0.8)(react@19.0.0-rc-69d4b800-20241021)(utf-8-validate@5.0.10))(react@19.0.0-rc-69d4b800-20241021)(terser@5.36.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8)
       '@wagmi/core': 2.14.4(@tanstack/query-core@5.59.20)(@types/react@18.3.12)(immer@10.1.1)(react@19.0.0-rc-69d4b800-20241021)(typescript@5.6.3)(use-sync-external-store@1.2.0(react@19.0.0-rc-69d4b800-20241021))(viem@2.21.43(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))
       react: 19.0.0-rc-69d4b800-20241021
       use-sync-external-store: 1.2.0(react@19.0.0-rc-69d4b800-20241021)
